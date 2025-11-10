@@ -1,6 +1,6 @@
 # CodedCachingLP
 
-LP-based formulation and symmetry-exploiting reductions for coded caching converses.
+LP-based formulation and symmetry-exploiting reductions for coded caching converse bounds.
 
 ---
 
