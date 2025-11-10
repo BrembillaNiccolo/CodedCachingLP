@@ -167,6 +167,18 @@ After compilation, the main executable can be run with the following syntax:
 ✅ This setup uses three demands and one common information variable, still achieving → Max value obtained = 2
 
 ---
+## ⏱️ Computational Setup
+
+All experiments were executed on a single node of **Delta** at **NCSA**, a high-performance computing cluster.  
+The LPs were solved using the **Gurobi 12.0.1** optimizer.
+
+The node configuration is as follows:
+- **CPU:** 2× AMD EPYC 7763 (“Milan”) processors — 128 cores total @ 2.45 GHz  
+- **Memory:** 256 GB DDR4 RAM  
+
+These specifications were used for all time and performance measurements reported in the paper.
+
+---
 ## 📝 Notes
 
 - All runs assume linear coding for placement and delivery.
