@@ -150,7 +150,7 @@ After compilation, the main executable can be run with the following syntax:
 ## 🧠 Example Commands
 ### Example 1 => 4 users, 4 files (Optimality at M=1)
 ```bash
-./main -nUser 4 -nFile 4 -allMValues -demands "{{0,0,1,2}}" -cycleDemands -debug 0 -solutionFile outputSolution.txt -deletePerm -fullVariables 
+./main -nUser 4 -nFile 4 -M "{1}" -demands "{{0,0,1,2}}" -cycleDemands -debug 0 -solutionFile outputSolution.txt -deletePerm -fullVariables 
 ```
 ✅ This setup reaches optimality for M=1 in the 4U4F configuration using two demands and two common information variables → Max value obtained = 1.5
 
