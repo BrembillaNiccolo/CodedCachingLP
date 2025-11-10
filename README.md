@@ -51,51 +51,14 @@ CacheLP/
  ```
 ---
 
-## 🧮 Compilation and Usage
+## 🧮 Compilation 
 
 ### Requirements
 - **C++17 or later**
 - **Make** utility
 - [Gurobi](https://www.gurobi.com) LP Solver
 
-### Build
-From the repository root:
-```bash
-make
- ```
----
-
-## 🚀 Usage
-
-After compilation, the main executable can be run with the following syntax:
-
-```bash
-./main -nUser <num_users> -nFile <num_files> \
-       -M "{numerator,denominator}" | -allMValues \
-       -alldemands | -demands "{{demand1},{demand2},...}" \
-       | -onedifferent "{a,b,c,...}" | -alldifferent "{a,b,c,...}" | -alldemandsOpt \
-       -debug <level> \
-       -commonInformations <num_info> "{variable1,variable2,...,variablek and variablek+1,...,variablen}" \
-       -solutionFile "<path>"
- ```
-### Parameters
-
-| Argument | Description |
-|---|---|
-| `-nUser <num_users>` | Number of users (K) in the caching system. |
-| `-nFile <num_files>` | Number of files (N) available in the library. |
-| `-M "{numerator,denominator}"` | Defines the normalized cache size (M/N). Example: `"{1,2}"` means ($M = \frac{1}{2}N$). |
-| `-allMValues` | Runs the LP for a predefined set of memory values and writes all results to the file specified by `-solutionFile`. Useful to characterize the full memory–rate tradeoff curve. |
-| `-alldemands` | Generates all possible demand combinations for the given (K, N). |
-| `-alldemandsOpt` | Optimized (lighter) version of `-alldemands` for heavy computations / large instances. |
-| `-demands "{{demand1},{demand2},...}"` | Specifies custom demand sets; each inner set represents file requests from all users. Example: `{{0,1,2},{1,1,0}}`. |
-| `-alldifferent "{a,b,c,...}"` | Generates **all** demands of a specified type. Example: `{1,1,1}` for (K=N=3) means all users request different files (sum = (N), length = (K)). |
-| `-onedifferent "{a,b,c,...}"` | Generates **one** representative demand of a given type. Use `-deletePerm` to remove equivalent permutations when you want results comparable to `-alldifferent`. |
-| `-debug <level>` | Controls verbosity (0 = minimal, 1 = medium, 2 = detailed). Level 2 prints all constraints to `output.txt`. |
-| `-commonInformations <num_info> "{var1,... and var3,...}"` | Specifies variables / information to print. Variables include:<br>• `W<num>` — file entropy (e.g., `W0`)<br>• `Z<num>` — cache variable (e.g., `Z0`)<br>• `X{req1,req2,...}` — transmission for a specific demand (e.g., `X{0,1,2}`)<br>Example: `{W0, X{0,1,2} and Z0}` |
-| `-solutionFile "<path>"` | Path where results and solution outputs (for all `M` values) will be saved. |
-
-## Makefile
+### Makefile
 
 The `Makefile` is structured as follows:
 
@@ -144,6 +107,45 @@ clean:
 	$(RM) $(OBJECTS_TEST) $(COMBO_OBJS) $(MAIN_TEST) $(COMBO_EXE) *~
 	@echo "Clean complete!"
 ```
+
+### Build
+From the repository root:
+```bash
+make
+ ```
+---
+
+## 🚀 Usage
+
+After compilation, the main executable can be run with the following syntax:
+
+```bash
+./main -nUser <num_users> -nFile <num_files> \
+       -M "{numerator,denominator}" | -allMValues \
+       -alldemands | -demands "{{demand1},{demand2},...}" \
+       | -onedifferent "{a,b,c,...}" | -alldifferent "{a,b,c,...}" | -alldemandsOpt \
+       -debug <level> \
+       -commonInformations <num_info> "{variable1,variable2,...,variablek and variablek+1,...,variablen}" \
+       -solutionFile "<path>"
+ ```
+### Parameters
+
+| Argument | Description |
+|---|---|
+| `-nUser <num_users>` | Number of users (K) in the caching system. |
+| `-nFile <num_files>` | Number of files (N) available in the library. |
+| `-M "{numerator,denominator}"` | Defines the normalized cache size (M/N). Example: `"{1,2}"` means ($M = \frac{1}{2}N$). |
+| `-allMValues` | Runs the LP for a predefined set of memory values and writes all results to the file specified by `-solutionFile`. Useful to characterize the full memory–rate tradeoff curve. |
+| `-alldemands` | Generates all possible demand combinations for the given (K, N). |
+| `-alldemandsOpt` | Optimized (lighter) version of `-alldemands` for heavy computations / large instances. |
+| `-demands "{{demand1},{demand2},...}"` | Specifies custom demand sets; each inner set represents file requests from all users. Example: `{{0,1,2},{1,1,0}}`. |
+| `-alldifferent "{a,b,c,...}"` | Generates **all** demands of a specified type. Example: `{1,1,1}` for (K=N=3) means all users request different files (sum = (N), length = (K)). |
+| `-onedifferent "{a,b,c,...}"` | Generates **one** representative demand of a given type. Use `-deletePerm` to remove equivalent permutations when you want results comparable to `-alldifferent`. |
+| `-debug <level>` | Controls verbosity (0 = minimal, 1 = medium, 2 = detailed). Level 2 prints all constraints to `output.txt`. |
+| `-commonInformations <num_info> "{var1,... and var3,...}"` | Specifies variables / information to print. Variables include:<br>• `W<num>` — file entropy (e.g., `W0`)<br>• `Z<num>` — cache variable (e.g., `Z0`)<br>• `X{req1,req2,...}` — transmission for a specific demand (e.g., `X{0,1,2}`)<br>Example: `{W0, X{0,1,2} and Z0}` |
+| `-solutionFile "<path>"` | Path where results and solution outputs (for all `M` values) will be saved. |
+
+
 ---
 ## 🧠 Example Commands
 ### Example 1 => 4 users, 4 files (Optimality at M=1)
@@ -172,3 +174,9 @@ clean:
 - Results and logs are saved to the path provided with -solutionFile.
 
 - To replicate the paper configurations, see the corresponding folders in final/4U4F, final/5U5F, and final/6U6F.
+
+---
+## 📜 License
+
+This project is released under the **MIT License**.  
+See the [LICENSE](https://github.com/BrembillaNiccolo/CodedCachingLP/blob/main/LICENSE) file for details.
